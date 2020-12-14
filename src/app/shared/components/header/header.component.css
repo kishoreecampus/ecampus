@@ -1,0 +1,49 @@
+header{
+    padding: 20px;
+    background-color: orange;
+}
+.container { 
+    display: flex;
+    
+    }
+    .container div {
+        
+        color: blue;
+        flex: auto;
+        padding: .5em;
+        margin: 0;
+    }
+
+    .container1 div {
+        flex: auto;
+        padding: .5em;
+        margin: 0;
+    }
+   
+    .cont{
+       
+        text-align: left;
+        font-size: 40px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+    .logo .date{
+        display: flex;
+        width: auto;
+        
+     
+    }
+    .container1{
+        background-color: blue;
+        display: flex;
+    }
+    
+    #time{
+        text-align: right;
+        color:white
+    }
+    .date{
+        color:white
+    }
+  
+  
