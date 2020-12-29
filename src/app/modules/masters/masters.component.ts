@@ -27,5 +27,21 @@ export class MastersComponent implements OnInit {
   home(){
     this.router.navigateByUrl('/');
   }
+  settings(){
+    this.router.navigateByUrl('settings');
+  }
+  profile(id){
+    if(id == 'Profile')
+    { 
+      this.router.navigateByUrl('/masters/profile');
+    }
+    else if(id == 'Class Master'){
+      this.router.navigateByUrl('/masters/classMaster');
+    }
+    else{
+      alert("Under Process");
+    }
+   
+  }
 
 }

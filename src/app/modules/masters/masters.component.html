@@ -1,10 +1,10 @@
 <div flexLayout="row" fxFlex>
     <div fxFlex="10"  style="background-color: yellow;">
         <div style="background-color: red; text-align: center;"><h2>Notice Board</h2></div>
-        <textarea matInput  [(ngModel)]="textArea" rows="5" cols="20"></textarea>
+        <textarea matInput  [(ngModel)]="textArea" style="width: 100%;"></textarea>
         <button mat-raised-button color="primary"style="margin-top:20px;width:100%;" (click)="home()">Home</button>
         <button mat-raised-button color="primary" style="margin-top:20px;width:100%;"  >Masters</button>
-        <button mat-raised-button color="primary"style="margin-top:20px;width:100%;">Settings</button>
+        <button mat-raised-button color="primary"style="margin-top:20px;width:100%;" (click)="settings()">Settings</button>
         <div style="background-color: red; text-align: center; margin-top: 20px;"><h2>UserName</h2></div>
         <div style="background-color: white; text-align: center; margin-top: 20px;"><h2>{{UserName}}</h2></div>
     </div>
@@ -25,7 +25,7 @@
             </p>
           </mat-card-content>
           <mat-card-actions style="text-align: center;">
-            <button mat-button>Click for More Details</button>
+            <button mat-button (click)="profile(num.name)">Click for {{num.name}} Details</button>
             
           </mat-card-actions>
         </mat-card>

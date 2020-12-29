@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
@@ -8,26 +8,36 @@ import { PreAdmissionComponent } from 'src/app/modules/pre-admission/pre-admissi
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from "@angular/material/card";
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MastersComponent } from 'src/app/modules/masters/masters.component';
+import { ProfileComponent } from  'src/app/modules/masters/profile/profile.component';
+import { ClassMasterComponent } from  'src/app/modules/masters/class-master/class-master.component'
+import { SettingsComponent } from 'src/app/modules/settings/settings.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
     PreAdmissionComponent,
-    MastersComponent
+    MastersComponent,
+    ProfileComponent,
+    ClassMasterComponent,
+    SettingsComponent
    
      
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule,
     SharedModule,
     FlexLayoutModule,
@@ -38,7 +48,14 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     FormsModule,
     MatCarouselModule.forRoot(),
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    HttpClientModule
+    
+  ],
+  exports:[
+    NgImageSliderModule
   ],
   providers: []
 })

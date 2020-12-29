@@ -1,0 +1,152 @@
+<div flexLayout="row" fxFlex>
+    <div fxFlex="10" style="background-color: yellow;">
+        <div style="background-color: red; text-align: center;">
+            <h2>Notice Board</h2>
+        </div>
+        <textarea matInput [(ngModel)]="textArea" style="width: 100%;"></textarea>
+        <button mat-raised-button color="primary" style="margin-top:20px;width:100%;" (click)="home()">Home</button>
+        <button mat-raised-button color="primary" style="margin-top:20px;width:100%;"
+            (click)="masters()">Masters</button>
+        <button mat-raised-button color="primary" style="margin-top:20px;width:100%;">Settings</button>
+        <div style="background-color: red; text-align: center; margin-top: 20px;">
+            <h2>UserName</h2>
+        </div>
+        <div style="background-color: white; text-align: center; margin-top: 20px;">
+            <h2>{{UserName}}</h2>
+        </div>
+    </div>
+    
+    <div fxFlex="90" style="padding: 10px;">
+        <div  fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%"  >
+                <mat-card class="tp-card1" style="height: 100%;">
+                    <mat-card-header>
+        
+                        <mat-card-title>Class Group</mat-card-title>
+                        <mat-card-subtitle>Create Class Group</mat-card-subtitle>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        <table>
+                            <tr>
+                                <td><label>Enter Class Group </label></td>
+                                <td> <input type="text" placeholder="Type your class Group" [(ngModel)]="classgroup"/></td>
+                            </tr>
+                        </table>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: left ;padding: 20px;" >
+                        <button mat-raised-button color="warn" [disabled]="!classgroup">Edit</button>
+                        <button mat-raised-button color="primary" (click)="createClassGroup(classgroup)" [disabled]="!classgroup">Submit</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div  fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%" >
+                <mat-card class="tp-card2">
+                    <mat-card-header>
+        
+                        <mat-card-title>Class</mat-card-title>
+                        <mat-card-subtitle>Create Class</mat-card-subtitle>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Choose Class Group</label>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+        
+                                        <mat-select [(ngModel)]="selectedGroupName">
+                                           <mat-option  *ngFor = "let gname of classGroup" [value]="gname.groupName">{{gname.groupName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Enter Class Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Class Name" [(ngModel)]="classname"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: left;padding: 20px;">
+                        <button mat-raised-button color="warn" [disabled]="!selectedGroupName || !classname">Edit</button>
+                        <button mat-raised-button color="primary" (click)=createClass(classname) [disabled]="!classgroup" [disabled]="!selectedGroupName || !classname">Submit</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%" >
+                <mat-card class="tp-card3">
+                    <mat-card-header>
+        
+                        <mat-card-title>Section</mat-card-title>
+                        <mat-card-subtitle>Create Section</mat-card-subtitle>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        <table>
+                            <!-- <tr>
+                                <td>
+                                    <label>Select Class Group</label>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select >
+                                            <mat-option  *ngFor = "let gname of classGroup" [value]="gname.groupName">{{gname.groupName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td>
+                                    <label>Select Class</label>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="selectedClassName">
+                                            <mat-option  *ngFor = "let cname of class" [value]="cname.className">{{cname.className}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Enter Section Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Section Name" [(ngModel)]="sectionName" />
+                                </td>
+                            </tr>
+                        </table>
+        
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: left;padding: 20px;">
+                        <button mat-raised-button color="warn" [disabled]="!selectedClassName || !sectionName">Edit</button>
+                        <button mat-raised-button color="primary"  [disabled]="!selectedClassName || !sectionName" (click)="createSection(selectedGroupName,selectedClassName,sectionName)">Submit</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <!-- <div fxFlex="30" style="padding: 10px;" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="30%">
+
+       
+    </div>
+
+    <div fxFlex="30" style="padding: 10px;" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="30%">
+
+       
+    </div>
+
+    <div fxFlex="30" style="padding: 10px;" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex="30%">
+
+        
+    </div> -->
+
+
+
+</div>

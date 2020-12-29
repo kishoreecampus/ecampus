@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.1.5",
+    "@angular/animations": "^10.1.6",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.1.5",
     "@angular/compiler": "~10.1.5",
@@ -27,7 +27,9 @@
     "highcharts": "^8.2.2",
     "highcharts-angular": "^2.8.2",
     "lodash": "^4.17.20",
+    "mat-video": "^2.8.1",
     "ng-gallery": "^5.0.0",
+    "ng-image-slider": "^2.6.4",
     "ngx-image-gallery": "^2.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

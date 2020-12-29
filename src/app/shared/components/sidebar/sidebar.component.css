@@ -1,5 +1,8 @@
 :host{
-    padding: 20px;
+    
     background-color: yellow;
     height: 100%;
 }
+:host::ng-deep mat-seek-progress-control{
+    width: 100%;
+  }

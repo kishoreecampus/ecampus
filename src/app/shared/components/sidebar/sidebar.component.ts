@@ -2,6 +2,8 @@ import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { map } from 'rxjs/operators';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { NewsApiService } from '../../../modules/news-api.service'
 
 @Component({
   selector: 'app-sidebar',
@@ -11,10 +13,12 @@ import { map } from 'rxjs/operators';
 })
 export class SidebarComponent implements OnInit {
   items: GalleryItem[];
-
-  imageData = data;
-  constructor(public gallery: Gallery, public lightbox: Lightbox) { }
   
+  imageData = data;
+  constructor(public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService) { }
+  mArticles:Array<any>;
+  mSources:Array<any>;
+  todayMessage:any="hi good evening";
   ngOnInit(): void {
     /** Basic Gallery Example */
 
@@ -35,6 +39,15 @@ export class SidebarComponent implements OnInit {
 
     // Load items into the lightbox gallery ref
     lightboxRef.load(this.items);
+    //load articles
+    this.newsapi.initArticles().subscribe(data => this.mArticles = data['articles']);
+    //load news sources
+    this.newsapi.initSources().subscribe(data=> this.mSources = data['sources']); 
+    console.log(this.mSources);
+  }
+  searchArticles(source){
+    console.log("selected source is: "+source);
+    this.newsapi.getArticlesByID(source).subscribe(data => this.mArticles = data['articles']);
   }
 
 }

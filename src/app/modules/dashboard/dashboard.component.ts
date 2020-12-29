@@ -35,5 +35,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('masters');
   }
   
-  
+  settings(){
+    alert("clicked")
+    this.router.navigateByUrl('settings');
+  }
 }

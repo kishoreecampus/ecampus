@@ -2,11 +2,11 @@ header{
     padding: 20px;
     background-color: orange;
 }
-.container { 
+.container2 { 
     display: flex;
     
     }
-    .container div {
+    .container2 div {
         
         color: blue;
         flex: auto;

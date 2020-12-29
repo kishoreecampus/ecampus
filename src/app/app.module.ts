@@ -10,9 +10,12 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 
 
+
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
+   
   
     
     
