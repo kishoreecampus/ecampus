@@ -10,6 +10,11 @@ export class SettingsComponent implements OnInit {
   title = 'Card View Demo';
   gridColumns = 3;
   UserName:any="Demo123"
+  textArea="some Notices";
+  picker:any;
+  date:any
+  selectedAcadamiceYear=[{"FromDate":'',"ToDate":''}];
+  selectedFinanceYear=[{"FromDate":'',"ToDate":''}];
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -19,6 +24,14 @@ export class SettingsComponent implements OnInit {
   }
   masters(){
     this.router.navigateByUrl('masters');
+  }
+
+  createAcadmicYear(){
+    console.log((<any>this.date).format());
+    alert((<any>this.date).format());
+  }
+  createFinanceYear(){
+
   }
 
 }

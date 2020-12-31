@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { NewsApiService } from '../../../modules/news-api.service'
 
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,7 +14,7 @@ import { NewsApiService } from '../../../modules/news-api.service'
 })
 export class SidebarComponent implements OnInit {
   items: GalleryItem[];
-  
+  textArea="Some Messages"
   imageData = data;
   constructor(public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService) { }
   mArticles:Array<any>;

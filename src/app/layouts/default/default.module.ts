@@ -22,6 +22,8 @@ import { LightboxModule } from 'ng-gallery/lightbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { HttpClientModule } from '@angular/common/http';
     LightboxModule,
     MatFormFieldModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
   ],
   exports:[

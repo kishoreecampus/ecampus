@@ -15,6 +15,69 @@
             <h2>{{UserName}}</h2>
         </div>
     </div>
+    <div fxFlex="90" style="padding: 10px;">
+        <div  fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%"  >
+                <mat-card class="tp-card1" style="height: 100%;">
+                    <mat-card-header>
+        
+                        <mat-card-title>Academic Year</mat-card-title>
+                        <mat-card-subtitle>Create Academic Year</mat-card-subtitle>
+                    </mat-card-header>
+                    
+        
+                    <mat-card-content>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label style="color: red;">Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="date" placeholder="select From Date">
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          <button mat-raised-button (click)="picker.open()">Open</button>
+                        <br/>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label style="color: red;">Choose a date</mat-label>
+                            <input matInput [matDatepicker]="pickerF" placeholder="select To Date">
+                            <mat-datepicker #pickerF></mat-datepicker>
+                          </mat-form-field>
+                          <button mat-raised-button (click)="pickerF.open()">Open</button>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: left ;padding: 20px;" >
+                        <button mat-raised-button color="warn" [disabled]="!classgroup">Edit</button>
+                        <button mat-raised-button color="primary" (click)="createAcadmicYear()" [disabled]="!classgroup">Submit</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div  fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%" >
+                <mat-card class="tp-card2">
+                    <mat-card-header>
+        
+                        <mat-card-title>Financal Year</mat-card-title>
+                        <mat-card-subtitle>Create financial Year</mat-card-subtitle>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label style="color: red;">Choose a date</mat-label>
+                            <input matInput [matDatepicker]="pickerA" placeholder="select From Date">
+                            <mat-datepicker #pickerA></mat-datepicker>
+                          </mat-form-field>
+                          <button mat-raised-button (click)="pickerA.open()">Open</button>
+                        <br/>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label style="color: red;">Choose a date</mat-label>
+                            <input matInput [matDatepicker]="pickerB" placeholder="select To Date">
+                            <mat-datepicker #pickerB></mat-datepicker>
+                          </mat-form-field>
+                          <button mat-raised-button (click)="pickerB.open()">Open</button>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: left;padding: 20px;">
+                        <button mat-raised-button color="warn" [disabled]="!selectedGroupName || !classname">Edit</button>
+                        <button mat-raised-button color="primary" (click)=createFinanceYear() [disabled]="!classgroup" [disabled]="!selectedGroupName || !classname">Submit</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>  
 
+        </div>
+    </div>
 
 </div>
