@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+  model:any={}
   constructor(private formBuilder: FormBuilder,private router: Router) { }
 
   ngOnInit() {

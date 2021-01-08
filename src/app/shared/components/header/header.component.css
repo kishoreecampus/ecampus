@@ -1,6 +1,6 @@
 header{
     padding: 20px;
-    background-color: orange;
+    
 }
 .container2 { 
     display: flex;
@@ -33,17 +33,31 @@ header{
         
      
     }
-    .container1{
-        background-color: blue;
+    .container1 blue{
+        
         display: flex;
     }
     
     #time{
         text-align: right;
-        color:white
+        color:black
     }
     .date{
-        color:white
+        color:black
     }
   
-  
+  .white{
+      background-color: white;
+  }
+  .orange{
+    background-color: orange;
+  }
+  .blue1{
+      background-color: white;
+      color: black;
+      display: flex;
+  }
+  .blue{
+      background-color: blue;
+      display: flex;
+  }

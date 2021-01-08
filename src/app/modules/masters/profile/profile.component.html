@@ -14,8 +14,8 @@
         
         <div  >
         <h2 style="text-align: center; background-color: chartreuse;" > Profile Register</h2>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" style="border-style: solid;
-        border-width: 2px;padding: 1em;background-color: cornflowerblue;">
+        <form [formGroup]="registerForm" (ngSubmit)="f.form.valid " style="border-style: solid;
+        border-width: 2px;padding: 1em;background-color: cornflowerblue;" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="firstName">TrustName</label>
                 <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />

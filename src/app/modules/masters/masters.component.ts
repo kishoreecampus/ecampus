@@ -25,7 +25,7 @@ export class MastersComponent implements OnInit {
   textArea ="Some Noticdsfdsfl;dglkle"
 
   home(){
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/dashboard');
   }
   settings(){
     this.router.navigateByUrl('settings');

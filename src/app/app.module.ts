@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,9 +13,11 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
    
   
     
@@ -23,6 +26,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -4,7 +4,7 @@ import { Lightbox } from 'ng-gallery/lightbox';
 import { map } from 'rxjs/operators';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { NewsApiService } from '../../../modules/news-api.service'
-
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
   items: GalleryItem[];
   textArea="Some Messages"
   imageData = data;
-  constructor(public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService) { }
+  constructor(public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService,private route:Router) { }
   mArticles:Array<any>;
   mSources:Array<any>;
   todayMessage:any="hi good evening";
@@ -49,6 +49,10 @@ export class SidebarComponent implements OnInit {
   searchArticles(source){
     console.log("selected source is: "+source);
     this.newsapi.getArticlesByID(source).subscribe(data => this.mArticles = data['articles']);
+  }
+
+  logout(){
+    this.route.navigateByUrl('/');
   }
 
 }
