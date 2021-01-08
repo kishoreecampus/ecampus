@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_api_key',
     'api_authentication',
     'user',
+    'modules',
     'dashboard',
 ]
 
@@ -89,7 +90,10 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    'AUTH_HEADER_TYPES': 'eCampus'
+    'AUTH_HEADER_TYPES': 'eCampus',
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': True,
 }
 
 SWAGGER_SETTINGS = {
@@ -99,7 +103,7 @@ SWAGGER_SETTINGS = {
             'name': 'X-API-KEY',
             'in': 'header'
         },
-        'Token': {
+        'eCampus': {
             'type': 'apiKey',
             'in': 'header',
             'name': 'Authorization',
