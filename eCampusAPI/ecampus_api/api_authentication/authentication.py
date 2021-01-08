@@ -1,7 +1,6 @@
-from rest_framework.authentication import TokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-class APITokenAuthentication(TokenAuthentication):
-    keyword = 'ecampus'
-
+class APITokenAuthentication(JWTAuthentication):
+    pass
 

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
+    'drf_yasg',
     'rest_framework_api_key',
-    'user',
     'api_authentication',
+    'user',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -78,9 +80,35 @@ REST_FRAMEWORK = {
         'api_authentication.authentication.APITokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'api_authentication.permissions.HasOrganizationAPIKey' 
+        'api_authentication.permissions.HasOrganizationAPIKey',
+        'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'AUTH_HEADER_TYPES': 'eCampus'
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+        'APIKey': {
+            'type': 'apiKey',
+            'name': 'X-API-KEY',
+            'in': 'header'
+        },
+        'Token': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+            "bearerFormat": "eCampus ",
+        },
+   }
+}
+
+API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
 
 WSGI_APPLICATION = 'ecampus_api.wsgi.application'
 
@@ -140,3 +168,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

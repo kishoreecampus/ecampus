@@ -7,10 +7,10 @@ from rest_framework_api_key.models import AbstractAPIKey
 from rest_framework_api_key.models import BaseAPIKeyManager
 from rest_framework_api_key.crypto import KeyGenerator
 
-@receiver(signals.post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=False, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
+# @receiver(signals.post_save, sender=settings.AUTH_USER_MODEL)
+# def create_auth_token(sender, instance=False, created=False, **kwargs):
+#     if created:
+#         Token.objects.create(user=instance)
 
 class OrganizationAPIKeyManager(BaseAPIKeyManager):
     key_generator = KeyGenerator(prefix_length=8, secret_key_length=64)
