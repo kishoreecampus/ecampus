@@ -18,6 +18,7 @@
     <div fxFlex="90" style="padding: 10px;">
         <div  fxLayout="row wrap" fxLayoutGap="20px grid">
             <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%"  >
+                <form [formGroup]="unavailabilityForm">
                 <mat-card class="tp-card1" style="height: 100%;">
                     <mat-card-header>
         
@@ -27,27 +28,36 @@
                     
         
                     <mat-card-content>
+
                         <mat-form-field class="example-full-width" appearance="fill">
                             <mat-label style="color: red;">Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker" [(ngModel)]="date" placeholder="select From Date">
-                            <mat-datepicker #picker></mat-datepicker>
+                            <!-- <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" placeholder="select From Date" formControlName="startDate">
+                            <mat-datepicker #picker></mat-datepicker> -->
+                            <input matInput [matDatepicker]="picker1" type="text" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
                           </mat-form-field>
-                          <button mat-raised-button (click)="picker.open()">Open</button>
+                          <button mat-raised-button (click)="picker1.open()">Open</button>
                         <br/>
                         <mat-form-field class="example-full-width" appearance="fill">
                             <mat-label style="color: red;">Choose a date</mat-label>
-                            <input matInput [matDatepicker]="pickerF" placeholder="select To Date">
-                            <mat-datepicker #pickerF></mat-datepicker>
+                            <!-- <input matInput [matDatepicker]="pickerF" placeholder="select To Date" formControlName="endDate" [min]="unavailabilityForm.controls.startDate.value">
+                            <mat-datepicker #pickerF></mat-datepicker> -->
+                            <input matInput [min]="unavailabilityForm.controls.startDate.value" [matDatepicker]="picker2" type="text" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
                           </mat-form-field>
-                          <button mat-raised-button (click)="pickerF.open()">Open</button>
+                          <button mat-raised-button (click)="picker2.open()">Open</button>
                     </mat-card-content>
                     <mat-card-actions style="text-align: left ;padding: 20px;" >
-                        <button mat-raised-button color="warn" [disabled]="!classgroup">Edit</button>
-                        <button mat-raised-button color="primary" (click)="createAcadmicYear()" [disabled]="!classgroup">Submit</button>
+                        <button mat-raised-button color="warn">Edit</button>
+                        <button mat-raised-button color="primary" (click)="createAcadmicYear()" >Submit</button>
                     </mat-card-actions>
                 </mat-card>
+            </form>
             </div>
             <div  fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="33%" >
+                <form [formGroup]="unavailabilityForm1">
                 <mat-card class="tp-card2">
                     <mat-card-header>
         
@@ -58,23 +68,30 @@
                     <mat-card-content>
                         <mat-form-field class="example-full-width" appearance="fill">
                             <mat-label style="color: red;">Choose a date</mat-label>
-                            <input matInput [matDatepicker]="pickerA" placeholder="select From Date">
-                            <mat-datepicker #pickerA></mat-datepicker>
+                            <!-- <input matInput [matDatepicker]="pickerA" placeholder="select From Date">
+                            <mat-datepicker #pickerA></mat-datepicker> -->
+                            <input matInput [min]="unavailabilityForm1.controls.startDate.value" [matDatepicker]="picker3" type="text" formControlName="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
                           </mat-form-field>
-                          <button mat-raised-button (click)="pickerA.open()">Open</button>
+                          <button mat-raised-button (click)="picker3.open()">Open</button>
                         <br/>
                         <mat-form-field class="example-full-width" appearance="fill">
                             <mat-label style="color: red;">Choose a date</mat-label>
-                            <input matInput [matDatepicker]="pickerB" placeholder="select To Date">
-                            <mat-datepicker #pickerB></mat-datepicker>
+                            <!-- <input matInput [matDatepicker]="pickerB" placeholder="select To Date">
+                            <mat-datepicker #pickerB></mat-datepicker> -->
+                            <input matInput [min]="unavailabilityForm1.controls.startDate.value" [matDatepicker]="picker4" type="text" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+      <mat-datepicker #picker4></mat-datepicker>
                           </mat-form-field>
-                          <button mat-raised-button (click)="pickerB.open()">Open</button>
+                          <button mat-raised-button (click)="picker4.open()">Open</button>
                     </mat-card-content>
                     <mat-card-actions style="text-align: left;padding: 20px;">
-                        <button mat-raised-button color="warn" [disabled]="!selectedGroupName || !classname">Edit</button>
-                        <button mat-raised-button color="primary" (click)=createFinanceYear() [disabled]="!classgroup" [disabled]="!selectedGroupName || !classname">Submit</button>
+                        <button mat-raised-button color="warn" >Edit</button>
+                        <button mat-raised-button color="primary" (click)=createFinanceYear() >Submit</button>
                     </mat-card-actions>
                 </mat-card>
+            </form>
             </div>  
 
         </div>

@@ -7,13 +7,17 @@ import { SettingsComponent } from './modules/settings/settings.component';
 import { PreAdmissionComponent } from './modules/pre-admission/pre-admission.component';
 import { ProfileComponent } from './modules/masters/profile/profile.component'
 import { ClassMasterComponent } from './modules/masters/class-master/class-master.component';
-
+import {LoginComponent } from './modules/login/login.component';
 
 const routes: Routes = [
 {path:'',
 component:DefaultComponent,
 children:[{
   path:'',
+  component:LoginComponent
+},
+  {
+  path:'dashboard',
   component:DashboardComponent
 },
 {

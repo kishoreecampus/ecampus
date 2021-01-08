@@ -1,4 +1,4 @@
-<header >
+<header [ngClass]="{'white':(route.url==='/'),'orange':(route.url!='/')}">
     <div flexLayout="row" fxFlex class="container2">
         <div fxFlex="20" class="logo">
             <img [src]="image" style="max-height: 80px; background-color: aliceblue;">
@@ -10,7 +10,7 @@
 </header>
 
 
-<div flexLayout="row" fxFlex class="container1">
+<div flexLayout="row" fxFlex class="container1" [ngClass]="{'blue1':(route.url==='/'),'blue':(route.url!='/')}">
     <div fxFlex="20" class="date">
         Date:{{date   | date: "dd-MM-yyyy"}}
     </div>
