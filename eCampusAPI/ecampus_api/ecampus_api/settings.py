@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'drf_yasg',
     'rest_framework_api_key',
     'api_authentication',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -116,6 +119,27 @@ API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
 
 WSGI_APPLICATION = 'ecampus_api.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost",
+    "http://localhost:80",
+    "http://localhost:8080",
+    "http://localhost:8000",
+]
+
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'x-api-key',
+]
+
+PERMISSION_APP_NAMES = [
+    'auth',
+    'user',
+    ]
+
+PERMISSION_MODEL_NAMES = [
+    'group',
+    'user',
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

@@ -15,6 +15,7 @@ class ObtainAcessTokenSerializer(TokenObtainPairSerializer):
         data['created_on'] = datetime.datetime.now()
         data['lifetime'] = int(refresh.access_token.lifetime.total_seconds())
         data['uid'] = self.user.id
+        data['name'] = self.user.first_name
         
         return data
 
