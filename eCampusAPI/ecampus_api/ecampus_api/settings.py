@@ -147,7 +147,7 @@ PERMISSION_MODEL_NAMES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eCampusAPI',
+        'NAME': 'ecampus_test',
         'HOST': '',
         'USER': 'admin',
         'PASSWORD': 'admin',
