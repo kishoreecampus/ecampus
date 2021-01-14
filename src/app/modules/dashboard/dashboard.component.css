@@ -1,15 +1,36 @@
-.content { 
-    padding: 16px; 
-  }
-  
-  .content > mat-card { 
-    width: 100px; 
-  }
-  mat-toolbar {
-    justify-content: space-between;
+.content {
+  padding: 16px;
 }
-:host{
 
-  
+.content>mat-card {
+  width: 100px;
+}
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+:host {
   height: 100%;
+}
+
+.blue1 {
+  visibility: hidden;
+}
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  font-size: 1vw;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
 }

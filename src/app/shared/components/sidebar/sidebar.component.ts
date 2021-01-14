@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { NewsApiService } from '../../../modules/news-api.service'
 import { Router, RouterModule } from '@angular/router';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,7 @@ export class SidebarComponent implements OnInit {
   items: GalleryItem[];
   textArea="Some Messages"
   imageData = data;
-  constructor(public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService,private route:Router) { }
+  constructor(private loationstrategy:LocationStrategy,public gallery: Gallery, public lightbox: Lightbox,private newsapi:NewsApiService,private route:Router) { }
   mArticles:Array<any>;
   mSources:Array<any>;
   todayMessage:any="hi good evening";
@@ -24,36 +25,56 @@ export class SidebarComponent implements OnInit {
     /** Basic Gallery Example */
 
     // Creat gallery items
-    this.items = this.imageData.map(item => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl }));
+    // this.items = this.imageData.map(item => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl }));
 
 
-    /** Lightbox Example */
+    // /** Lightbox Example */
 
-    // Get a lightbox gallery ref
-    const lightboxRef = this.gallery.ref('lightbox');
+    // // Get a lightbox gallery ref
+    // const lightboxRef = this.gallery.ref('lightbox');
 
-    // Add custom gallery config to the lightbox (optional)
-    lightboxRef.setConfig({
-      imageSize: ImageSize.Cover,
-      thumbPosition: ThumbnailsPosition.Top
-    });
+    // // Add custom gallery config to the lightbox (optional)
+    // lightboxRef.setConfig({
+    //   imageSize: ImageSize.Cover,
+    //   thumbPosition: ThumbnailsPosition.Top
+    // });
 
-    // Load items into the lightbox gallery ref
-    lightboxRef.load(this.items);
-    //load articles
-    this.newsapi.initArticles().subscribe(data => this.mArticles = data['articles']);
-    //load news sources
-    this.newsapi.initSources().subscribe(data=> this.mSources = data['sources']); 
-    console.log(this.mSources);
+    // // Load items into the lightbox gallery ref
+    // lightboxRef.load(this.items);
+    // //load articles
+    // this.newsapi.initArticles().subscribe(data => this.mArticles = data['articles']);
+    // //load news sources
+    // this.newsapi.initSources().subscribe(data=> this.mSources = data['sources']); 
+    // console.log(this.mSources);
   }
-  searchArticles(source){
-    console.log("selected source is: "+source);
-    this.newsapi.getArticlesByID(source).subscribe(data => this.mArticles = data['articles']);
+  // searchArticles(source){
+  //   console.log("selected source is: "+source);
+  //   this.newsapi.getArticlesByID(source).subscribe(data => this.mArticles = data['articles']);
+  // }
+  preventBackButton() {
+    // history.pushState(null, null, location.href);
+    // this.loationstrategy.onPopState(() => {
+    //   history.pushState(null, null, location.href);
+    // })
+//     history.pushState(null, null, window.location.href);  
+// this.loationstrategy.onPopState(() => {
+//   history.pushState(null, null, window.location.href);
+// }); 
+var url = window.location.href;
+window.history.go(-window.history.length);
+window.location.href = url; 
   }
-
   logout(){
-    this.route.navigateByUrl('/');
+    
+   
+    
+    // this.preventBackButton();
+    localStorage.removeItem('usertoken');
+    localStorage.clear();
+    this.route.navigate(['/login']);
+    
   }
+  
 
 }
 const data = [

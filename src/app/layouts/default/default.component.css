@@ -1,5 +1,43 @@
-:host{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: auto
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Extra small devices (phones, less than 768px) */
+
+@media (max-width:767px) {
+  body {
+    font-size: 2vw;
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width:768px) {
+  body {
+    font-size: 10vw;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width:992px) {
+  body {
+    font-size: 20vw;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width:1200px) {
+  body {
+    font-size: 30vw;
+  }
 }

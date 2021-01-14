@@ -15,33 +15,32 @@ export class MastersComponent implements OnInit {
   }
   title = 'Card View Demo';
   gridColumns = 3;
-  UserName:any="Demo123"
-  modules:any=[
-  { "id" : 1,"name" : "Profile", "color" : "orange"},
-  { "id" : 2,"name" : "Room Management", "color" : "violet"},
-  { "id" : 3,"name" : "Class Master", "color" : "green"},
-  { "id" : 4,"name" : "Caste Master", "color" : "grey"}
- ];
-  textArea ="Some Noticdsfdsfl;dglkle"
+  UserName: any = "Demo123"
+  modules: any = [
+    { "id": 1, "name": "Profile", "color": "orange" },
+    { "id": 2, "name": "Room Management", "color": "violet" },
+    { "id": 3, "name": "Class Master", "color": "green" },
+    { "id": 4, "name": "Caste Master", "color": "grey" }
+  ];
+  textArea = "Some Noticdsfdsfl;dglkle"
 
-  home(){
+  home() {
     this.router.navigateByUrl('/dashboard');
   }
-  settings(){
+  settings() {
     this.router.navigateByUrl('settings');
   }
-  profile(id){
-    if(id == 'Profile')
-    { 
+  profile(id) {
+    if (id == 'Profile') {
       this.router.navigateByUrl('/masters/profile');
     }
-    else if(id == 'Class Master'){
+    else if (id == 'Class Master') {
       this.router.navigateByUrl('/masters/classMaster');
     }
-    else{
+    else {
       alert("Under Process");
     }
-   
+
   }
 
 }

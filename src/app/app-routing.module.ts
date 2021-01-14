@@ -7,41 +7,44 @@ import { SettingsComponent } from './modules/settings/settings.component';
 import { PreAdmissionComponent } from './modules/pre-admission/pre-admission.component';
 import { ProfileComponent } from './modules/masters/profile/profile.component'
 import { ClassMasterComponent } from './modules/masters/class-master/class-master.component';
-import {LoginComponent } from './modules/login/login.component';
+import { LoginComponent } from './modules/login/login.component';
+import { AuthGuard } from './auth.guard'
 
 const routes: Routes = [
-{path:'',
-component:DefaultComponent,
-children:[{
-  path:'',
-  component:LoginComponent
-},
   {
-  path:'dashboard',
-  component:DashboardComponent
-},
-{
-  path:'preAdmission',
-  component:PreAdmissionComponent
-},
-{
-  path:'masters',
-  component:MastersComponent
-},
-{
-  path:'settings',
-  component:SettingsComponent
-},
-{
-  path:'masters/profile',
-  component:ProfileComponent
-},
-{
-  path:'masters/classMaster',
-  component:ClassMasterComponent
-}
-]
-} 
+    path: '',
+    component: DefaultComponent,
+    children: [{
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'preAdmission',
+      component: PreAdmissionComponent
+    },
+    {
+      path: 'masters',
+      component: MastersComponent
+    },
+    {
+      path: 'settings',
+      component: SettingsComponent
+    },
+    {
+      path: 'masters/profile',
+      component: ProfileComponent
+    },
+    {
+      path: 'masters/classMaster',
+      component: ClassMasterComponent
+    }
+    ]
+  }
 ];
 
 @NgModule({

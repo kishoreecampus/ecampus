@@ -1,40 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders  } from '@angular/common/http';
-import { map } from "rxjs/operators"; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsApiService {
   api_key = 'ZGh9TSKi.N2HtDAQ5LuqKtG4E50dGpGoHeVtVOR5ELTcYx5p9sf4UmH2HG8esCCfpNKprXC0n';
-  url='http://13.232.170.221/authentication/obtain-access-token/';
-  constructor(private http:HttpClient) { }
-  initSources(){
-    return this.http.get('https://newsapi.org/v2/sources?language=en&apiKey='+this.api_key);
- }
- initArticles(){
-  return this.http.get('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey='+this.api_key);
- }
- getArticlesByID(source: String){
-  return this.http.get('https://newsapi.org/v2/top-headlines?sources='+source+'&apiKey='+this.api_key);
- }
- login(username:string,password:string){
-   let data={'username':username,'password':password}
-  //  let headers = new Headers();
-  //  headers.append('Content-Type','application/json');
-  //  headers.append('X-API-KEY','ZGh9TSKi.N2HtDAQ5LuqKtG4E50dGpGoHeVtVOR5ELTcYx5p9sf4UmH2HG8esCCfpNKprXC0n')
-   
-  return this.http.post<any>(this.url,data,{
-    headers:new HttpHeaders({
-      'Content-Type':'application/json',
-      'X-API-KEY':this.api_key
-    })
-  })
-  .pipe(map(res => {
-     
-      // }
-      console.log(res);
-      return res;
-  }));
- }
+
+  constructor(private http: HttpClient) { }
+
+  login(username: string, password: string) {
+    const httpheaders = new HttpHeaders()
+      .append('X-API-KEY', this.api_key)
+      .append("Access-Control-Allow-Origin", "*")
+      .append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+      .append("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+
+    console.log(httpheaders)
+    return this.http.post<any>('http://13.232.170.221/authentication/obtain-access-token/', ({ "username": username, "password": password }), { headers: httpheaders })
+      .pipe(map(data => {
+
+        return data;
+      }));
+  }
+  getDashboard() {
+    let space = ("eCampus " + localStorage.getItem('usertoken'))
+    const httpheaders1 = new HttpHeaders().append('Authorization', space)
+      .append('X-API-KEY', this.api_key)
+      .append("Access-Control-Allow-Origin", "*")
+      .append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+      .append('Accept', 'application/json')
+    console.log("NewHeaders", httpheaders1)
+
+    return this.http.get('http://13.232.170.221/modules/dashboard/', { headers: httpheaders1 })
+  }
 }

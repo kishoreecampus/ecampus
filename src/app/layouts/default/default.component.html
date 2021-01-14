@@ -1,13 +1,17 @@
-<app-header flexLayout="column"></app-header>
+<div flexLayout="column">
+    <app-header flexLayout="column"></app-header>
+</div>
+
 <div flexLayout="row" fxFlex>
-    
-    <div fxFlex="90" class="content">
+
+    <div fxFlex="90">
         <router-outlet></router-outlet>
     </div>
-   <div fxFlex="10"  >
+
+    <div fxFlex="10">
         <app-sidebar fxFlex *ngIf="sideMenu"></app-sidebar>
     </div>
 </div>
 
 
-<app-footer flexLayout="column"></app-footer>
+<app-footer flexLayout="column" *ngIf="sideMenu"></app-footer>
