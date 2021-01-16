@@ -12,9 +12,8 @@ from .permissions import UserHasPermission, UserHasSpecificPermission
 from django.conf import settings
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
-    permission_classes = [IsAuthenticated, UserHasPermission]
+    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, UserHasPermission]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -28,6 +27,10 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == 'partial_update':
             return serializers.UserPartialUpdateSerializer
         return super(UserViewSet, self).get_serializer_class()
+
+    def get_queryset(self):
+        queryset = User.objects.filter(is_superuser=0)
+        return queryset
 
 class UserRoleViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
