@@ -4,22 +4,34 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.response import Response
-from .serializers import UserSerializer, UserGroupSerializer, ListPermissionSerializer
+from user import serializers
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from .models import User
 from api_authentication import permissions as api_permissions
 from .permissions import UserHasPermission, UserHasSpecificPermission
 from django.conf import settings
 
-class UserInformation(APIView):
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes = [IsAuthenticated, UserHasPermission]
 
-    def get(self, request):
-        content = {'user': str(request.user), 'first_name': str(request.user.uid) }
-        return Response(content)
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return serializers.UserCreateSerializer
+        if self.action == 'update':
+            return serializers.UserUpdateSerializer
+        if self.action == 'retrieve':
+            return serializers.UserDetailSerializer
+        if self.action == 'list':
+            return serializers.UserDetailSerializer
+        if self.action == 'partial_update':
+            return serializers.UserPartialUpdateSerializer
+        return super(UserViewSet, self).get_serializer_class()
 
 class UserRoleViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
-    serializer_class = UserGroupSerializer
+    serializer_class = serializers.UserGroupSerializer
     permission_classes = [IsAuthenticated, UserHasPermission]
 
 class ListPermission(APIView, UserHasSpecificPermission):
@@ -30,3 +42,4 @@ class ListPermission(APIView, UserHasSpecificPermission):
         else:
             queryset = {'details':'You don not have permission to perform this action'}
         return Response(queryset)
+

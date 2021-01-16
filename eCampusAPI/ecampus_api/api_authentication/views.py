@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -14,3 +15,6 @@ class ObtainAcessToken(jwt_views.TokenObtainPairView):
 class RefreshAccessToken(jwt_views.TokenRefreshView):
     permission_classes = [HasOrganizationAPIKey]
     serializer_class = RefreshAccessTokenSerializer
+
+class AuthenticationLogoutView(APIView):
+    permissionclasses = [IsAuthenticated, HasOrganizationAPIKey]

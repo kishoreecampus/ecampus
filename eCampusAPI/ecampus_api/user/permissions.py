@@ -20,7 +20,6 @@ class UserHasPermission(permissions.DjangoModelPermissions):
 class UserHasSpecificPermission(permissions.BasePermission):
 
     def has_specific_permission(self, request, permission_name):
-        print(request.user.get_all_permissions())
         if permission_name in request.user.get_all_permissions():
             return True
         return False
