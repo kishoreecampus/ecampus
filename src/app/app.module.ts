@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { AuthGuard} from './auth.guard';
 
 
 
@@ -17,6 +18,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 @NgModule({
   declarations: [
     AppComponent,
+    
     
    
   
@@ -35,7 +37,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
     
     
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,39 +10,34 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  textArea ="Some Noticdsfdsfl;dglkle"
-  UserName:any="Demo123"
+  textArea = "Some Noticdsfdsfl;dglkle"
+  UserName: any = "Demo123"
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-  model:any={}
-  constructor(private formBuilder: FormBuilder,private router: Router) { }
+  model: any = {}
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        username: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+      trustName: ['', Validators.required],
+      instutionName: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      administrator: ['', Validators.required],
+      mobile: ['', Validators.required],
+      websiteName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(12)]]
     });
-}
-get f() { return this.registerForm.controls; }
-onSubmit() {
-  this.submitted = true;
-
-  // stop here if form is invalid
-  if (this.registerForm.invalid) {
-      return;
+  }
+  register() {
+    console.log(this.model)
   }
 
-  this.loading = true;
-  
-}
-  
-  home(){
-    this.router.navigateByUrl('/');
+  home() {
+    this.router.navigateByUrl('/dashboard');
   }
-  masters(){
+  masters() {
     this.router.navigateByUrl('/masters');
   }
 }

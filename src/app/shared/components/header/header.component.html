@@ -1,20 +1,20 @@
-<header [ngClass]="{'white':(route.url==='/'),'orange':(route.url!='/')}">
-    <div flexLayout="row" fxFlex class="container2">
+<div [ngClass]="{'white':(route.url==='/login'),'orange':(route.url!='/login')}" style="padding: 20px;" flexLayout="row" fxFlex>
+    <div  class="container2">
         <div fxFlex="20" class="logo">
             <img [src]="image" style="max-height: 80px; background-color: aliceblue;">
         </div>
         <div fxFlex="80" class="cont">
-            <div class="cont" fxFlex="80" class="content">{{schoolName}}</div>
+            <div class="cont" fxFlex="80" class="content"><h1 style="font-size:3vw;padding:10px"[ngClass]="{'blue1':(route.url==='/login')}">{{schoolName}}</h1></div>
         </div>
     </div>
-</header>
+</div>
 
 
-<div flexLayout="row" fxFlex class="container1" [ngClass]="{'blue1':(route.url==='/'),'blue':(route.url!='/')}">
-    <div fxFlex="20" class="date">
+<div flexLayout="row" fxFlex class="container1" [ngClass]="{'blue1':(route.url==='/login'),'blue':(route.url!='/')}">
+    <div fxFlex="20" class="date" style="font-size:1.5vw;">
         Date:{{date   | date: "dd-MM-yyyy"}}
     </div>
-    <div fxFlex="80" id="time">
+    <div fxFlex="80" id="time" style="font-size:1.5vw;">
        Time: {{date   | date: "HH:mm:ss"}}
     </div>
 </div>

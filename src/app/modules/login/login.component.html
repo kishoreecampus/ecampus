@@ -2,32 +2,29 @@
     <div id="fullscreen_bg" class="fullscreen_bg">
         <div class="container ">
 
-            <!-- <form class="form-signin border">
-                <h1 class="form-signin-heading text-muted" >Sign In</h1>
-                <input type="text" class="form-control" placeholder="UserName" required="" autofocus="" [(ngModel)]="name" name="userName" required>
-                
-                <input type="password" class="form-control" placeholder="Password" required="" [(ngModel)]="pwd" name="password">
-                <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="submit()">
-                    Sign In
-                </button>
-            </form> -->
 
-            <form class="form-signin border" (ngSubmit)="f.form.valid" #f="ngForm" novalidate name="form">
+            <form class="form-signin border" (ngSubmit)="f.form.valid" #f="ngForm" novalidate name="form"
+                style="background-color: white;">
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                    <h1 class="form-signin-heading text-muted" >Sign In</h1>
-                    <input type="text" class="form-control" name="userName" [(ngModel)]="name" #username="ngModel" required placeholder="UserName" required="" autofocus=""/>
+                    <h1 class="form-signin-heading text-muted">Sign In</h1>
+                    <input type="text" class="form-control" name="userName" [(ngModel)]="name" #username="ngModel"
+                        required placeholder="UserName" required="" autofocus="" />
                     <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
                 </div>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                    <input type="password" class="form-control" name="password" [(ngModel)]="pwd" #password="ngModel" required placeholder="password" required="" autofocus=""/>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="pwd" #password="ngModel"
+                        required placeholder="password" required="" autofocus="" appAppPassword />
                     <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
                 </div>
+                <div *ngIf="isLoginError" class="red-text center error-message">
+                    <i class="material-icons">error</i> Incorrect username or password
+                </div>
                 <div class="form-group">
-                    <button  class="btn btn-lg btn-primary btn-block" (click)="submit()">Login</button>
+                    <button class="btn btn-lg btn-primary btn-block" (click)="submit()">Login</button>
                 </div>
             </form>
-        
+
         </div>
     </div>
-  
- </div>
+
+</div>

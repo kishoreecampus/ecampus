@@ -1,7 +1,4 @@
-header{
-    padding: 20px;
-    
-}
+
 .container2 { 
     display: flex;
     
@@ -23,7 +20,7 @@ header{
     .cont{
        
         text-align: left;
-        font-size: 40px;
+        
         font-weight: normal;
         text-transform: uppercase;
     }
@@ -48,6 +45,8 @@ header{
   
   .white{
       background-color: white;
+      
+      
   }
   .orange{
     background-color: orange;
@@ -56,6 +55,7 @@ header{
       background-color: white;
       color: black;
       display: flex;
+      visibility: hidden;
   }
   .blue{
       background-color: blue;

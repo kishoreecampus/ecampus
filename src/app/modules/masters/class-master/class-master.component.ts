@@ -23,7 +23,7 @@ export class ClassMasterComponent implements OnInit {
   ngOnInit(): void {
   }
   home(){
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/dashboard');
   }
   masters(){
     this.router.navigateByUrl('/masters');
