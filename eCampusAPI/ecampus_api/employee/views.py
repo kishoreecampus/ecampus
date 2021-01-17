@@ -4,40 +4,40 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.response import Response
-from user import serializers
+from employee import serializers
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from .models import User
+from .models import Employee
 from api_authentication import permissions as api_permissions
-from .permissions import UserHasPermission, UserHasSpecificPermission
+from .permissions import EmployeeHasPermission, EmployeeHasSpecificPermission
 from django.conf import settings
 
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.UserSerializer
-    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, UserHasPermission]
+class EmployeeViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.EmployeeSerializer
+    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
 
     def get_serializer_class(self):
         if self.action == 'create':
-            return serializers.UserCreateSerializer
+            return serializers.EmployeeCreateSerializer
         if self.action == 'update':
-            return serializers.UserUpdateSerializer
+            return serializers.EmployeeUpdateSerializer
         if self.action == 'retrieve':
-            return serializers.UserDetailSerializer
+            return serializers.EmployeeDetailSerializer
         if self.action == 'list':
-            return serializers.UserDetailSerializer
+            return serializers.EmployeeDetailSerializer
         if self.action == 'partial_update':
-            return serializers.UserPartialUpdateSerializer
-        return super(UserViewSet, self).get_serializer_class()
+            return serializers.EmployeePartialUpdateSerializer
+        return super(EmployeeViewSet, self).get_serializer_class()
 
     def get_queryset(self):
-        queryset = User.objects.filter(is_superuser=0)
+        queryset = Employee.objects.filter(is_superuser=0)
         return queryset
 
-class UserRoleViewSet(viewsets.ModelViewSet):
+class EmployeeRoleViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
-    serializer_class = serializers.UserGroupSerializer
-    permission_classes = [IsAuthenticated, UserHasPermission]
+    serializer_class = serializers.EmployeeGroupSerializer
+    permission_classes = [IsAuthenticated, EmployeeHasPermission]
 
-class ListPermission(APIView, UserHasSpecificPermission):
+class ListPermission(APIView, EmployeeHasSpecificPermission):
 
     def get(self, request):
         if self.has_specific_permission(request, 'auth.view_permission') or request.user.is_superuser:
@@ -45,4 +45,3 @@ class ListPermission(APIView, UserHasSpecificPermission):
         else:
             queryset = {'details':'You don not have permission to perform this action'}
         return Response(queryset)
-

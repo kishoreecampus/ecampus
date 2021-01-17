@@ -7,7 +7,7 @@ from api_authentication.permissions import HasOrganizationAPIKey
 from rest_framework_simplejwt import views as jwt_views
 from .serializers import ObtainAcessTokenSerializer, RefreshAccessTokenSerializer
 from rest_framework.permissions import IsAuthenticated
-from user.models import User
+from employee.models import Employee
 
 class ObtainAcessToken(jwt_views.TokenObtainPairView):
     permission_classes = [HasOrganizationAPIKey]
@@ -22,7 +22,7 @@ class AuthenticationLogoutView(APIView):
 
 
 def is_superuser_id(uid):
-    if User.objects.filter(id=uid, is_superuser=1).exists():
+    if Employee.objects.filter(id=uid, is_superuser=1).exists():
         return True
     else:
         return False

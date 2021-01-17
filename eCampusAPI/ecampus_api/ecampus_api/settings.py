@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "employee.Employee"
 
 # Application definition
 
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_api_key',
     'api_authentication',
-    'user',
+    'employee',
     'modules',
     'dashboard',
 ]
@@ -133,12 +133,12 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 PERMISSION_APP_NAMES = [
     'auth',
-    'user',
+    'employee',
     ]
 
 PERMISSION_MODEL_NAMES = [
     'group',
-    'user',
+    'employee',
     ]
 
 # Database
