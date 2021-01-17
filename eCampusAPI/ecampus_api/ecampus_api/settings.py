@@ -27,7 +27,7 @@ SECRET_KEY = '19$7#do@=eb3q(d=k^!ieryrl96x2=kzeji(i_ebeuj4ga_(1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 AUTH_USER_MODEL = "employee.Employee"
 
