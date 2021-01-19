@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'employee',
     'modules',
     'dashboard',
+    'preadmission',
 ]
 
 MIDDLEWARE = [
@@ -198,3 +199,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SMS_API_KEY = 'EC28M2FgjL8-v45PpkRDTOu9xxAjdoKRtesSphgFEV'
+SMS_SENDER_ID = 'CESMMS'
+SMS_PREFIX = 'MAX MULLER PUBLIC SCHOOL: '

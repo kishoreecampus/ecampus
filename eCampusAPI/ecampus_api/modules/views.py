@@ -18,7 +18,7 @@ class DashboardModules(generics.ListAPIView):
         else:
             modules = self.request.user.modules
             queryset = queryset.filter(id__in=modules.split(","))
-        queryset = queryset.filter(category='dashboard', is_active=True)
+        queryset = queryset.filter(category='dashboard', is_active=True).order_by('rank')
         return queryset
 
 class MasterModules(generics.ListAPIView):

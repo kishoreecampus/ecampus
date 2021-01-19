@@ -8,7 +8,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'username', 'password', 'email', 'groups', 'is_active']
+        fields = ['first_name', 'last_name', 'username', 'password', 'email', 'mobile', 'groups', 'is_active']
 
     def validate(self, validated_data):
         if is_superuser_id(self.instance.id):
@@ -20,7 +20,7 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'username', 'password', 'email', 'groups', 'is_active']
+        fields = ['first_name', 'last_name', 'username', 'password', 'email', 'mobile', 'groups', 'is_active']
 
     def create(self, validated_data):
         user = super(EmployeeCreateSerializer, self).create(validated_data)
@@ -32,7 +32,7 @@ class EmployeeUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'email', 'groups', 'is_active']
+        fields = ['first_name', 'last_name', 'email', 'groups', 'mobile', 'is_active']
 
     def validate(self, validated_data):
         if is_superuser_id(self.instance.id):
@@ -46,10 +46,14 @@ class EmployeePartialUpdateSerializer(serializers.ModelSerializer):
         fields = ['is_active']
 
 class EmployeeDetailSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
-        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'groups', 'is_active']
+        fields = ['id', 'full_name', 'username', 'email', 'mobile', 'groups', 'is_active']
+
+    def get_full_name(self, obj):
+        return '{} {}'.format(obj.first_name, obj.last_name)
 
 class EmployeeGroupSerializer(serializers.ModelSerializer):
     class Meta:
