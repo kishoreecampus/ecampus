@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'modules',
     'dashboard',
     'preadmission',
+    'student',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,7 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization',
             "bearerFormat": "eCampus ",
         },
-   }
+   },
 }
 
 API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
@@ -130,6 +131,8 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'x-api-key',
+    'Content-Type',
+    'Content-Disposition',
 ]
 
 PERMISSION_APP_NAMES = [

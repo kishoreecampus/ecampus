@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from preadmission.models import Application
+from student.models import StudentDocument
+from student.serializers import StudentDocumentSerializer
 
 class ApplicationCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Application
-        exclude = ['is_verified', 'created_on', 'created_by', 'reference_number', ]
+        exclude = ['is_verified', 'created_on', 'created_by', 'reference_number', 'is_applied']
 
     def validate(self, validate_data):
         if validate_data['student_name'] and not validate_data['student_name'].isalpha():
@@ -41,7 +43,7 @@ class ApplicationUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Application
-        exclude = ('created_by',)
+        exclude = ('created_by', 'is_applied')
     
     def validate(self, validate_data):
         if self.instance.is_verified:
@@ -82,7 +84,23 @@ class ApplicationListSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class SubmitApplicationSerializer(serializers.ModelSerializer):
+    # student_document = StudentDocumentSerializer(many=True, read_only=False)
+    # student_document = serializers.PrimaryKeyRelatedField(queryset=StudentDocument.objects.all())
 
     class Meta:
         model = Application
-        exclude = ['id', 'query', 'is_verified', 'reference_number', 'created_by']
+        # fields = ['studentdocument']
+        exclude = ['id', 'query', 'is_verified', 'reference_number', 'created_by', 'is_applied']
+
+
+    def validate(self, data):
+        required_keys = ['student_photo', 'birth_certificate']
+        if hasattr(self, 'initial_data'):
+            extra_keys = set(self.initial_data.keys()) - set(self.fields.keys())
+            if extra_keys:
+                for key in required_keys:
+                    if not key in extra_keys:
+                        raise serializers.ValidationError("required " + key)
+            else:
+                raise serializers.ValidationError("Required Photo, Birth certificate, TC")
+        return data

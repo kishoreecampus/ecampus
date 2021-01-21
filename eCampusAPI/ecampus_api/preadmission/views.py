@@ -10,6 +10,8 @@ from employee.permissions import EmployeeHasPermission
 from datetime import datetime
 import time
 from base.views import send_sms
+from student.models import StudentDocument
+from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 
 class ApplicationMixin(viewsets.ModelViewSet):
     
@@ -49,22 +51,41 @@ class ApplicationViewSet(ApplicationMixin):
 
     def perform_update(self, serializer):
         enquiry_reference_numer = None
-        if self.request.data['is_verified'] == True:
+        is_verified = self.request.data.get('is_verified')
+        if is_verified == True:
             enquiry_reference_numer = self.get_reference_numer()
             mobile_number = self.request.data[self.request.data['primary_contact_person']+"_mobile"]
             message = "Application link - " + str(enquiry_reference_numer)
-            send_sms(mobile_number, message)
+            # send_sms(mobile_number, message)
         serializer.save(reference_number=enquiry_reference_numer)
 
 
 class SubmitApplicationViewSet(ApplicationMixin):
     lookup_field = "reference_number"
+    serializer_class = serializers.SubmitApplicationSerializer
+    # parser_classes = [FormParser, MultiPartParser,]
+    permission_classes = [AllowAny, HasOrganizationAPIKey]
 
-    def get_serializer_class(self):
-        return serializers.SubmitApplicationSerializer
+    # def get_serializer_class(self):
+    #     return serializers.SubmitApplicationSerializer
 
     def get_permissions(self):
         if self.action == 'update':
             self.permission_classes = [AllowAny, ]
         return super().get_permissions()
 
+    # def update(self, request, *args, **kwargs):
+    #         serializer = self.get_serializer(data=request.data)
+    #         serializer.is_valid(raise_exception=True)
+    #         self.perform_update(serializer)
+    #         headers = self.get_success_headers(serializer.data)
+    #         serializer.data
+    #         return Response({"Success": "msb blablabla","data":serializer.data}, headers=headers)
+
+    def perform_update(self, serializer):
+        application_instance = serializer.save(is_applied = True)
+        student_photo = self.request.FILES.get('student_photo', 'NULL')
+        birth_certificate = self.request.FILES.get('birth_certificate', 'NUll')
+        tc = self.request.FILES.get('tc', 'NULL')
+        student_document = StudentDocument.objects.create(application=application_instance, student_photo=student_photo, birth_certificate=birth_certificate, tc=tc)
+        student_document.save()

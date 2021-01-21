@@ -28,6 +28,7 @@ class Application(models.Model):
     primary_contact_person = models.CharField(choices=primary_contact_person_choice, max_length=10)
     query = models.TextField("Query", max_length=2000, blank=True)
     is_verified = models.BooleanField('Is Verified', default=0)
+    is_applied = models.BooleanField('Is Applied', default=0)
     reference_number = models.CharField('Refrence Number', max_length=50, null=True)
     created_by = models.IntegerField('Created By', default=0)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
