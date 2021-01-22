@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_api_key',
     'api_authentication',
+    'roles_and_permission',
     'employee',
     'modules',
     'dashboard',
@@ -88,6 +89,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'api_authentication.permissions.HasOrganizationAPIKey',
         'rest_framework.permissions.IsAuthenticated',
+        'employee.permissions.EmployeeHasPermission',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }

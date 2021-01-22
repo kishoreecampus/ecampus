@@ -33,8 +33,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('accounts/', admin.site.urls),
     path('authentication/', include('api_authentication.urls')),
-    path('employee/', include('employee.urls')),
+    path('', include('roles_and_permission.urls')),
     path('modules/', include('modules.urls')),
+    path('employee/', include('employee.urls')),
     path('pre-admission/', include('preadmission.urls')),
     path('', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('api-documents/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
