@@ -8,7 +8,7 @@ class Student(models.Model):
 def get_upload_path(instance, filename):
     return "uploads/documents/application_{0}/{1}".format(instance.application.id, filename)
 
-class StudentDocument(models.Model):
+class Document(models.Model):
     application = models.OneToOneField(Application, on_delete=models.PROTECT)
     student = models.OneToOneField(Student, on_delete=models.PROTECT, null=True)
     student_photo = models.ImageField('Photo', upload_to=get_upload_path, validators=[FileExtensionValidator(['png','jpg','jpeg'])], null=True)

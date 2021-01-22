@@ -1,4 +1,4 @@
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import Group as Role, Permission
 from rest_framework import serializers
 from .models import Employee
 from django.conf import settings
@@ -55,10 +55,10 @@ class EmployeeDetailSerializer(serializers.ModelSerializer):
     def get_full_name(self, obj):
         return '{} {}'.format(obj.first_name, obj.last_name)
 
-class EmployeeGroupSerializer(serializers.ModelSerializer):
+class EmployeeRoleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Group
-        fields = ['id', 'name', 'permissions']
+        model = Role
+        fields = ['id', 'name', 'permissions', 'department']
         # extra_kwargs = {'permissions': {'required': False}}
 
 class ListPermissionSerializer(serializers.ModelSerializer):

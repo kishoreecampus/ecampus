@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from preadmission.models import Application
-from student.models import StudentDocument
+from student.models import Document
 from student.serializers import StudentDocumentSerializer
 
 class ApplicationCreateSerializer(serializers.ModelSerializer):

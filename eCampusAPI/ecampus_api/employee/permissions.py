@@ -1,12 +1,12 @@
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group as Role, Permission
 from rest_framework import permissions 
 import copy
 
-def get_user_group(employee):
+def get_user_role(employee):
 
     try:
-        return Group.objects.get(id=employee.id)
-    except Group.DoesNotExist:
+        return Role.objects.get(id=employee.id)
+    except Role.DoesNotExist:
         return None
 
 class EmployeeHasPermission(permissions.DjangoModelPermissions):

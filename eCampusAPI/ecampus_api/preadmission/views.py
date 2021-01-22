@@ -10,14 +10,13 @@ from employee.permissions import EmployeeHasPermission
 from datetime import datetime
 import time
 from base.views import send_sms
-from student.models import StudentDocument
+from student.models import Document
 from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 
 class ApplicationMixin(viewsets.ModelViewSet):
     
     queryset = Application.objects.all()
     serializer_class = serializers.ApplicationCreateSerializer
-    permission_classes = [IsAuthenticated, HasOrganizationAPIKey, EmployeeHasPermission]
 
     def get_reference_numer(self):
         # reference_number = str(datetime.now()).split(".")[0].replace("-","").replace(" ","").replace(":","")
@@ -87,5 +86,5 @@ class SubmitApplicationViewSet(ApplicationMixin):
         student_photo = self.request.FILES.get('student_photo', 'NULL')
         birth_certificate = self.request.FILES.get('birth_certificate', 'NUll')
         tc = self.request.FILES.get('tc', 'NULL')
-        student_document = StudentDocument.objects.create(application=application_instance, student_photo=student_photo, birth_certificate=birth_certificate, tc=tc)
+        student_document = Document.objects.create(application=application_instance, student_photo=student_photo, birth_certificate=birth_certificate, tc=tc)
         student_document.save()

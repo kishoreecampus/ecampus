@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from student.models import StudentDocument
+from student.models import Document
 
 class StudentDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = StudentDocument
+        model = Document
         # fields = '__all__'
         exclude = ['uploaded_on', ]

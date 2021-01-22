@@ -14,7 +14,6 @@ class ObtainAcessToken(jwt_views.TokenObtainPairView):
     serializer_class = ObtainAcessTokenSerializer
 
 class RefreshAccessToken(jwt_views.TokenRefreshView):
-    permission_classes = [HasOrganizationAPIKey]
     serializer_class = RefreshAccessTokenSerializer
 
 class AuthenticationLogoutView(APIView):
