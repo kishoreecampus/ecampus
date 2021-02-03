@@ -1,6 +1,7 @@
 import urllib.request
 import urllib.parse
 from django.conf import settings
+from rest_framework import response, status
 
 def send_sms(number, message):
     message = settings.SMS_PREFIX + message
@@ -10,3 +11,10 @@ def send_sms(number, message):
     smsRes =  urllib.request.urlopen(request, data)
     response = smsRes.read()
     return (response)
+
+class DestroyWithPayloadMixin(object):
+     def destroy(self, *args, **kwargs):
+         print(status)
+         serializer = self.get_serializer(self.get_object())
+         super().destroy(*args, **kwargs)
+         return response.Response(serializer.data, status=status.HTTP_200_OK)

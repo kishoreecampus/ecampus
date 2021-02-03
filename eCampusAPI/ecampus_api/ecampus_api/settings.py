@@ -91,6 +91,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
         'employee.permissions.EmployeeHasPermission',
     ],
+    'DEFAULT_RENDERER_CLASSES':[
+        'base.renderers.APIJSONRenderer',
+    ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
@@ -100,7 +103,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': 'eCampus',
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': True,
+    'UPDATE_LAST_LOGIN': False,
 }
 
 SWAGGER_SETTINGS = {
@@ -208,3 +211,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 SMS_API_KEY = 'EC28M2FgjL8-v45PpkRDTOu9xxAjdoKRtesSphgFEV'
 SMS_SENDER_ID = 'CESMMS'
 SMS_PREFIX = 'MAX MULLER PUBLIC SCHOOL: '
+SUCCESS_CODES = (200, 201, 202, 204, 206, )
