@@ -15,5 +15,5 @@ class APIJSONRenderer(renderers.JSONRenderer):
             else:
                 response['status'] = False
                 response['message'] = 'failed'
-                response['message'] = data.get('detail', None)
+                response['message'] = [data]
         return super(APIJSONRenderer, self).render(response, accepted_media_type, renderer_context)
