@@ -40,8 +40,6 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
         fields = ['trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number']
 
     def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
         if validated_data['trust_name'] and not validated_data['trust_name'].isalpha():
             raise serializers.ValidationError("Invalid trust name")
         if validated_data['institution_name'] and not validated_data['institution_name'].isalpha():
@@ -63,10 +61,6 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id', 'trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number','created_on','created_by']
     
-    def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
-        return validated_data
 
 class RoomManagementSerializer(serializers.ModelSerializer):
 
@@ -104,8 +98,6 @@ class ClassGroupUpdateSerializer(serializers.ModelSerializer):
         fields = ['class_group','created_on'] 
 
     def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
         if validated_data['class_group'] and not validated_data['class_group'].isalpha():
             raise serializers.ValidationError("Invalid class group name")
         if ClassGroup.objects.filter(class_group=validated_data['class_group']).exists():
@@ -119,10 +111,6 @@ class ClassGroupDetailSerializer(serializers.ModelSerializer):
         model = ClassGroup
         fields = ['id','class_group','created_on','created_by']
 
-    def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
-        return validated_data 
 
 
 class ClassNameSerializer(serializers.ModelSerializer):
@@ -154,8 +142,6 @@ class ClassNameUpdateSerializer(serializers.ModelSerializer):
         fields = ['class_group','class_name','created_on']
     
     def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
         if ClassName.objects.filter(class_name=validated_data['class_name']).exists():
             raise serializers.ValidationError('class name already exist.')
         if validated_data['class_name'] and not validated_data['class_name'].isalpha():
@@ -170,10 +156,6 @@ class ClassNameDetailSerializer(serializers.ModelSerializer):
         model = ClassName
         fields = ['id','class_group','class_name','created_on','created_by']
 
-    def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
-        return validated_data
 
 class SectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -204,9 +186,13 @@ class SectionUpdateSerializer(serializers.ModelSerializer):
         fields = ['class_name', 'section_name', 'created_on']
     
     def validate(self, validated_data):
-            if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
-            return validated_data
+        if Section.objects.filter(section_name=validated_data['section_name']).exists():
+            raise serializers.ValidationError('section name already exist.')
+        if validated_data['section_name'] and not validated_data['section_name'].isalnum():
+            raise serializers.ValidationError("Invalid section name")
+        if validated_data['section_name'] and not validated_data['section_name'].islower():
+            raise serializers.ValidationError("Invalid section name")
+        return validated_data
 
 class SectionDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -214,10 +200,6 @@ class SectionDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'class_name', 'section_name',
                   'created_on', 'created_by']
     
-    def validate(self, validated_data):
-            if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
-            return validated_data
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -245,9 +227,12 @@ class CategoryUpdateSerializer(serializers.ModelSerializer):
         fields = ['category', 'created_on']
 
     def validate(self, validated_data):
-            if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
-            return validated_data
+        if Category.objects.filter(category=validated_data['category']).exists():
+            raise serializers.ValidationError('Category already exists')
+        if validated_data['category'] and not validated_data['category'].isalnum():
+            raise serializers.ValidationError("Invalid category")
+
+        return validated_data
 
 
 class CategoryDetailSerializer(serializers.ModelSerializer):
@@ -255,10 +240,6 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'category','created_on', 'created_by']
 
-    def validate(self, validated_data):
-            if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
-            return validated_data
 
 class CasteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -284,9 +265,11 @@ class CasteUpdateSerializer(serializers.ModelSerializer):
         model = Caste
         fields = ['category', 'caste', 'created_on']
 
-    def validate(self, validated_data):
-        if is_superuser_id(self.instance.id):
-            raise serializers.ValidationError('You do not have permission')
+    def validate(self,validated_data):
+        if Caste.objects.filter(caste=validated_data['caste']).exists():
+            raise serializers.ValidationError('Caste already exists')
+        if validated_data['caste'] and not validated_data['caste'].isalpha():
+            raise serializers.ValidationError("Invalid Caste")
         return validated_data
 
 
@@ -295,7 +278,3 @@ class CasteDetailSerializer(serializers.ModelSerializer):
         model = Caste
         fields = ['id', 'category', 'caste', 'created_on', 'created_by']
 
-    def validate(self, validated_data):
-            if is_superuser_id(self.instance.id):
-                raise serializers.ValidationError('You do not have permission')
-            return validated_data
