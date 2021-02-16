@@ -14,7 +14,6 @@ def send_sms(number, message):
 
 class DestroyWithPayloadMixin(object):
      def destroy(self, *args, **kwargs):
-         print(status)
          serializer = self.get_serializer(self.get_object())
          super().destroy(*args, **kwargs)
          return response.Response(serializer.data, status=status.HTTP_200_OK)
