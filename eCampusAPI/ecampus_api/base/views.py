@@ -13,6 +13,7 @@ def send_sms(number, message):
     return (response)
 
 class DestroyWithPayloadMixin(object):
+
      def destroy(self, *args, **kwargs):
          serializer = self.get_serializer(self.get_object())
          super().destroy(*args, **kwargs)
