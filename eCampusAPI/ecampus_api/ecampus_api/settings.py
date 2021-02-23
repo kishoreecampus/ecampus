@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     'roles_and_permission',
     'employee',
     'modules',
+    'master',
     'dashboard',
     'preadmission',
     'student',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
