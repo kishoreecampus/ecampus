@@ -1,0 +1,10 @@
+﻿django==3.1.5
+django-cors-headers==3.6.0
+djangorestframework==3.12.2
+drf-yasg==1.20.0
+djangorestframework-api-key==2.0.0
+Pillow==2.2.1
+djangorestframework-simplejwt==4
+PyJWT==1.7.1
+django-phonenumber-field==5.0.0
+phonenumbers==8.12.18
