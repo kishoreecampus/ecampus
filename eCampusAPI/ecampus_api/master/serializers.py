@@ -18,9 +18,10 @@ class ProfileCreateSerializer(serializers.ModelSerializer):
 
 
     def validate(self, validated_data):
-        if validated_data['trust_name'] and not validated_data['trust_name'].isalpha():
+        if validated_data['trust_name'] and not validated_data['trust_name'].isascii():
             raise serializers.ValidationError("Invalid trust name")
-        if validated_data['institution_name'] and not validated_data['institution_name'].isalpha():
+
+        if validated_data['institution_name'] and not validated_data['institution_name'].isascii():
             raise serializers.ValidationError("Invalid institution name")
         if Profile.objects.filter(trust_name=validated_data['trust_name']).exists():
             raise serializers.ValidationError('trust name already exist.')
@@ -40,9 +41,11 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
         fields = ['trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number']
 
     def validate(self, validated_data):
-        if validated_data['trust_name'] and not validated_data['trust_name'].isalpha():
+        if validated_data['trust_name'] and not validated_data['trust_name'].isascii():
             raise serializers.ValidationError("Invalid trust name")
-        if validated_data['institution_name'] and not validated_data['institution_name'].isalpha():
+        if validated_data['trust_name'].len()<=3:
+            raise serializers.ValidationError("Invalid trust name")
+        if validated_data['institution_name'] and not validated_data['institution_name'].isascii():
             raise serializers.ValidationError("Invalid institution name")
         if Profile.objects.filter(trust_name=validated_data['trust_name']).exists():
             raise serializers.ValidationError('trust name already exist.')
@@ -84,8 +87,10 @@ class ClassGroupCreateSerializer(serializers.ModelSerializer):
     def validate(self, validated_data):
         if ClassGroup.objects.filter(class_group=validated_data['class_group']).exists():
             raise serializers.ValidationError('class group already exist.')
+        if len(validated_data['class_group']) <= 2:
+            raise serializers.ValidationError("Invalid class group name")
     
-        if validated_data['class_group'] and not validated_data['class_group'].isalpha():
+        if validated_data['class_group'] and not validated_data['class_group'].isascii():
             raise serializers.ValidationError("Invalid class group name")
     
         return validated_data 
@@ -98,7 +103,9 @@ class ClassGroupUpdateSerializer(serializers.ModelSerializer):
         fields = ['class_group','created_on'] 
 
     def validate(self, validated_data):
-        if validated_data['class_group'] and not validated_data['class_group'].isalpha():
+        if validated_data['class_group'] and not validated_data['class_group'].isascii():
+            raise serializers.ValidationError("Invalid class group name")
+        if len(validated_data['class_group']) <= 2:
             raise serializers.ValidationError("Invalid class group name")
         if ClassGroup.objects.filter(class_group=validated_data['class_group']).exists():
             raise serializers.ValidationError('class group already exist.')
@@ -128,10 +135,7 @@ class ClassNameCreateSerializer(serializers.ModelSerializer):
     def validate(self, validated_data):
         if ClassName.objects.filter(class_name=validated_data['class_name']).exists():
             raise serializers.ValidationError('class name already exist.')
-        if validated_data['class_name'] and not validated_data['class_name'].isalpha():
-            raise serializers.ValidationError("Invalid class name")
-
-        if validated_data['class_name'] and not validated_data['class_name'].islower():
+        if validated_data['class_name'] and not validated_data['class_name'].isalnum():
             raise serializers.ValidationError("Invalid class name")
         return validated_data
 
@@ -144,11 +148,9 @@ class ClassNameUpdateSerializer(serializers.ModelSerializer):
     def validate(self, validated_data):
         if ClassName.objects.filter(class_name=validated_data['class_name']).exists():
             raise serializers.ValidationError('class name already exist.')
-        if validated_data['class_name'] and not validated_data['class_name'].isalpha():
+        if validated_data['class_name'] and not validated_data['class_name'].isalnum():
             raise serializers.ValidationError("Invalid class name")
 
-        if validated_data['class_name'] and not validated_data['class_name'].islower():
-            raise serializers.ValidationError("Invalid class name")
         return validated_data
 
 class ClassNameDetailSerializer(serializers.ModelSerializer):
@@ -170,11 +172,7 @@ class SectionCreateSerializer(serializers.ModelSerializer):
         fields = ['class_name','section_name']
 
     def validate(self,validated_data):
-        if Section.objects.filter(section_name=validated_data['section_name']).exists():
-            raise serializers.ValidationError('section name already exist.')
-        if validated_data['section_name'] and not validated_data['section_name'].isalnum():
-            raise serializers.ValidationError("Invalid section name")
-        if validated_data['section_name'] and not validated_data['section_name'].islower():
+        if validated_data['section_name'] and not validated_data['section_name'].isalpha():
             raise serializers.ValidationError("Invalid section name")
         return validated_data
 
@@ -186,11 +184,7 @@ class SectionUpdateSerializer(serializers.ModelSerializer):
         fields = ['class_name', 'section_name', 'created_on']
     
     def validate(self, validated_data):
-        if Section.objects.filter(section_name=validated_data['section_name']).exists():
-            raise serializers.ValidationError('section name already exist.')
-        if validated_data['section_name'] and not validated_data['section_name'].isalnum():
-            raise serializers.ValidationError("Invalid section name")
-        if validated_data['section_name'] and not validated_data['section_name'].islower():
+        if validated_data['section_name'] and not validated_data['section_name'].isalpha():
             raise serializers.ValidationError("Invalid section name")
         return validated_data
 
@@ -198,7 +192,7 @@ class SectionDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section
         fields = ['id', 'class_name', 'section_name',
-                  'created_on', 'created_by']
+                  'created_on', 'created_by']  
     
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -215,7 +209,7 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
     def validate(self,validated_data):
         if Category.objects.filter(category=validated_data['category']).exists():
             raise serializers.ValidationError('Category already exists')
-        if validated_data['category'] and not validated_data['category'].isalnum():
+        if validated_data['category'] and not validated_data['category'].isascii():
             raise serializers.ValidationError("Invalid category")
 
         return validated_data
@@ -229,7 +223,7 @@ class CategoryUpdateSerializer(serializers.ModelSerializer):
     def validate(self, validated_data):
         if Category.objects.filter(category=validated_data['category']).exists():
             raise serializers.ValidationError('Category already exists')
-        if validated_data['category'] and not validated_data['category'].isalnum():
+        if validated_data['category'] and not validated_data['category'].isascii():
             raise serializers.ValidationError("Invalid category")
 
         return validated_data
@@ -268,8 +262,8 @@ class CasteUpdateSerializer(serializers.ModelSerializer):
     def validate(self,validated_data):
         if Caste.objects.filter(caste=validated_data['caste']).exists():
             raise serializers.ValidationError('Caste already exists')
-        if validated_data['caste'] and not validated_data['caste'].isalpha():
-            raise serializers.ValidationError("Invalid Caste")
+        if validated_data['caste'] and not validated_data['caste'].isalpha() or not validated_data['caste'].isspace():
+            raise serializers.ValidationError("Invalid Caste") 
         return validated_data
 
 
