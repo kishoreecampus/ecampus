@@ -8,13 +8,13 @@ class ProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Profile
-        fields = ['id', 'trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number']
+        fields = ['id', 'trust_name', 'institution_name', 'address1', 'address2','phone_number', 'administrator', 'mobile_number', 'academic_start_year', 'academic_end_year']
 
 class ProfileCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Profile
-        fields = ['trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number']
+        fields = ['trust_name', 'institution_name', 'address1', 'address2', 'phone_number','administrator', 'mobile_number', 'academic_start_year', 'academic_end_year']
 
 
               
@@ -23,14 +23,14 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Profile
-        fields = ['trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number']
+        fields = ['trust_name', 'institution_name', 'address1', 'address2', 'phone_number', 'administrator', 'mobile_number', 'academic_start_year', 'academic_end_year']
 
 
 class ProfileDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Profile
-        fields = ['id', 'trust_name', 'institution_name','address1','address2','phone_number','administrator','mobile_number','created_on','created_by']
+        fields = ['id', 'trust_name', 'institution_name', 'address1', 'address2', 'phone_number', 'administrator', 'mobile_number','academic_start_year', 'academic_end_year','created_on', 'created_by']
     
 
 class RoomManagementSerializer(serializers.ModelSerializer):
