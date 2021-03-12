@@ -11,8 +11,8 @@ from employee.permissions import EmployeeHasPermission, EmployeeHasSpecificPermi
 
 # Create your views here.
 class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
-    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -32,15 +32,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
             user = 0
         serializer.save(created_by=user)
 
-    def get_queryset(self):
-        queryset = Profile.objects 
-        return queryset
-    
-
 class ClassGroupViewset(viewsets.ModelViewSet):
+    queryset = ClassGroup.objects.all()
     serializer_class = serializers.ClassGroupSerializer
-    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
-
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -60,14 +54,9 @@ class ClassGroupViewset(viewsets.ModelViewSet):
             user = 0
         serializer.save(created_by=user)
 
-    def get_queryset(self):
-        queryset = ClassGroup.objects
-        return queryset
-
 class ClassNameViewset(viewsets.ModelViewSet):
+    queryset = ClassName.objects.all()
     serializer_class = serializers.ClassNameSerializer
-    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
-
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -87,14 +76,9 @@ class ClassNameViewset(viewsets.ModelViewSet):
             user = 0
         serializer.save(created_by=user)
 
-    def get_queryset(self):
-        queryset = ClassName.objects
-        return queryset
-
 class SectionViewset(viewsets.ModelViewSet):
+    queryset = Section.objects.all()
     serializer_class = serializers.SectionSerializer
-    permission_classes = [IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
-
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -114,15 +98,9 @@ class SectionViewset(viewsets.ModelViewSet):
             user = 0
         serializer.save(created_by=user)
 
-    def get_queryset(self):
-        queryset = Section.objects
-        return queryset
-
-
 class CategoryViewset(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
     serializer_class = serializers.CategorySerializer
-    permission_classes = [
-        IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -142,15 +120,9 @@ class CategoryViewset(viewsets.ModelViewSet):
             user = 0
         serializer.save(created_by=user)
 
-    def get_queryset(self):
-        queryset = Category.objects
-        return queryset
-
-
 class CasteViewset(viewsets.ModelViewSet):
+    queryset = Caste.objects.all()
     serializer_class = serializers.CasteSerializer
-    permission_classes = [
-        IsAuthenticated, api_permissions.HasOrganizationAPIKey, EmployeeHasPermission]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -169,7 +141,3 @@ class CasteViewset(viewsets.ModelViewSet):
         else:
             user = 0
         serializer.save(created_by=user)
-
-    def get_queryset(self):
-        queryset = Caste.objects
-        return queryset

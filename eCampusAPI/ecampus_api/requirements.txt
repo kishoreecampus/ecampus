@@ -8,3 +8,5 @@ djangorestframework-simplejwt==4
 PyJWT==1.7.1
 django-phonenumber-field==5.0.0
 phonenumbers==8.12.18
+django-cleanup==5.1.0
+django-private-storage==2.2.2

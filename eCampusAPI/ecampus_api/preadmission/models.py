@@ -1,8 +1,12 @@
+import uuid
 from django.db import models
 from master.models import ClassName, Caste
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
+from student.models import Document
 
 class Application(models.Model):
+    application_token = models.CharField('Application token', editable=False, unique=True, max_length=250)
+    docs = models.OneToOneField(Document, on_delete=models.PROTECT, null=True)
     first_name = models.CharField('First Name', validators=[MinLengthValidator(3), RegexValidator(regex='^[a-zA-Z ]*$')], max_length=60)
     last_name = models.CharField('Last Name', validators=[MinLengthValidator(3), RegexValidator(regex='^[a-zA-Z ]*$')], max_length=60)
     GENDER_CHOICES = (('male','Male'), ('female','Female'), ('other','Other'))
@@ -34,6 +38,7 @@ class Application(models.Model):
     primary_contact_person = models.CharField(choices=primary_contact_person_choice, max_length=10)
     query = models.TextField("Query", max_length=2000, blank=True)
     is_verified = models.BooleanField('Is Verified', default=0)
+    is_docs_verified = models.BooleanField('Is Docs Verified', default=0)
     is_applied = models.BooleanField('Is Applied', default=0)
     reference_number = models.CharField('Refrence Number', unique=True, max_length=50, null=True)
     created_by = models.IntegerField('Created By', default=0)

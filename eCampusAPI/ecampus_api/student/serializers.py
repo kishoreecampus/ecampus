@@ -7,3 +7,9 @@ class StudentDocumentSerializer(serializers.ModelSerializer):
         model = Document
         # fields = '__all__'
         exclude = ['uploaded_on', ]
+
+class StudentApplicationDocumentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Document
+        exclude = ['id', 'student']

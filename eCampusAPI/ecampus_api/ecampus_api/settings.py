@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '19$7#do@=eb3q(d=k^!ieryrl96x2=kzeji(i_ebeuj4ga_(1i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_cleanup',
     'corsheaders',
     'drf_yasg',
     'rest_framework_api_key',
@@ -209,6 +210,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SMS_API_KEY = 'EC28M2FgjL8-v45PpkRDTOu9xxAjdoKRtesSphgFEV'
 SMS_SENDER_ID = 'CESMMS'

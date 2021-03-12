@@ -14,5 +14,6 @@ class APIJSONRenderer(renderers.JSONRenderer):
                 response['data'] = [data]
             else:
                 response['status'] = False
-                response['message'] = [data[message_name][0] if isinstance(data[message_name], list) else data[message_name] for message_name in data]
+                response['message'] = [data]
+                # response['message'] = [data[message_name][0] if isinstance(data[message_name], list) else data[message_name] for message_name in data]
         return super(APIJSONRenderer, self).render(response, accepted_media_type, renderer_context)
